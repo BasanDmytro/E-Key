@@ -3,8 +3,11 @@ package com.stepping.step5.controllers;
 import com.stepping.step5.entity.models.University;
 import com.stepping.step5.entity.repository.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/university")
@@ -13,7 +16,7 @@ public class UniversityRestController {
     @Autowired
     private UniversityRepository universityRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllUniversities(){
         ArrayList<University> collection = new ArrayList<>();
@@ -42,6 +45,16 @@ public class UniversityRestController {
         }
         return university.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<University>> getAllUniversities(){
+        return new ResponseEntity<>((Collection<University>) universityRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<University> getUniversityWithId(@PathVariable int id){
+        return new ResponseEntity<>(universityRepository.findOne(id), HttpStatus.OK);
     }
 
     @RequestMapping("/create")

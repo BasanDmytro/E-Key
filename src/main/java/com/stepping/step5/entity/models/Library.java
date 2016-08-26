@@ -1,5 +1,7 @@
 package com.stepping.step5.entity.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -15,6 +17,7 @@ public class Library implements Serializable{
     @Column(name = "Id_library", nullable = false)
     private Integer libraryId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "Id_univer")
     private University university;

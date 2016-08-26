@@ -3,8 +3,11 @@ package com.stepping.step5.controllers;
 import com.stepping.step5.entity.models.Course;
 import com.stepping.step5.entity.repository.CoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 @RestController
@@ -14,7 +17,7 @@ public class CourseRestController {
     @Autowired
     private CoursesRepository coursesRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllCourses(){
         ArrayList<Course> collection = new ArrayList<>();
@@ -43,6 +46,16 @@ public class CourseRestController {
         }
         return course.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<Course>> getAllCourses(){
+        return new ResponseEntity<>((Collection<Course>) coursesRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Course> getCourseWithId(@PathVariable int id){
+        return new ResponseEntity<>(coursesRepository.findOne(id), HttpStatus.OK);
     }
 
 

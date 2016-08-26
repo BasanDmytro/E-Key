@@ -1,5 +1,7 @@
 package com.stepping.step5.entity.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -33,6 +35,8 @@ public class Student implements Serializable{
     @Column(name = "Phone_numb")
     private Long phoneNumb;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "Id_group")
     private Group group;

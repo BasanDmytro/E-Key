@@ -5,11 +5,12 @@ import com.stepping.step5.entity.models.Student;
 import com.stepping.step5.entity.repository.GroupsRepository;
 import com.stepping.step5.entity.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/student")
@@ -21,7 +22,7 @@ public class StudentRestController {
     @Autowired
     GroupsRepository groupsRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllStudents(){
         ArrayList<Student> collection = new ArrayList<>();
@@ -50,6 +51,16 @@ public class StudentRestController {
         }
         return student.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<Student>> getAllStudents(){
+        return new ResponseEntity<>((Collection<Student>) studentRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Student> getStudentWithId(@PathVariable int id){
+        return new ResponseEntity<>(studentRepository.findOne(id), HttpStatus.OK);
     }
 
     @RequestMapping("/create")
@@ -91,7 +102,7 @@ public class StudentRestController {
         return "Student succesfully deleted!";
     }
 
-    @RequestMapping("/group")
+    /*@RequestMapping("/group")
     @ResponseBody
     public String getAllGroupStudents(int id){
         ArrayList<Student> students = new ArrayList<>();
@@ -109,5 +120,5 @@ public class StudentRestController {
             return res;
         }else
             return "This group has no students!";
-    }
+    }*/
 }

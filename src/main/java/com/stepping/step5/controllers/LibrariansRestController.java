@@ -6,11 +6,12 @@ import com.stepping.step5.entity.models.Library;
 import com.stepping.step5.entity.repository.LibrariansRepository;
 import com.stepping.step5.entity.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/librarian")
@@ -22,7 +23,7 @@ public class LibrariansRestController {
     @Autowired
     private LibrariansRepository librariansRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllLibrarians(){
         ArrayList<Librarian> collection = new ArrayList<>();
@@ -70,6 +71,16 @@ public class LibrariansRestController {
         }
         return librarian.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<Librarian>> getAllLibrarians(){
+        return new ResponseEntity<>((Collection<Librarian>) librariansRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Librarian> getlibrarianWithId(@PathVariable int id){
+        return new ResponseEntity<>(librariansRepository.findOne(id), HttpStatus.OK);
     }
 
     @RequestMapping("/create")

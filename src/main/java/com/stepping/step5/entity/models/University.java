@@ -1,5 +1,7 @@
 package com.stepping.step5.entity.models;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -15,9 +17,11 @@ import javax.persistence.Table;
 @Table(name = "university")
 public class University implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id_univer", nullable = false)
     private Integer univerId;
+
+
 
     @Column(name = "Name_univer")
     private String univerName;

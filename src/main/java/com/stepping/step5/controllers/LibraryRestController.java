@@ -5,8 +5,11 @@ import com.stepping.step5.entity.models.University;
 import com.stepping.step5.entity.repository.LibraryRepository;
 import com.stepping.step5.entity.repository.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/library")
@@ -18,7 +21,7 @@ public class LibraryRestController {
     @Autowired
     private UniversityRepository universityRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllLibraries(){
         ArrayList<Library> collection = new ArrayList<>();
@@ -47,9 +50,19 @@ public class LibraryRestController {
         }
         return library.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<Library>> getAllLibraries(){
+        return new ResponseEntity<>((Collection<Library>) libraryRepository.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping("/university")
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Library> getlibraryWithId(@PathVariable int id){
+        return new ResponseEntity<>(libraryRepository.findOne(id), HttpStatus.OK);
+    }
+
+    /*@RequestMapping("/university")
     @ResponseBody
     public String getAllUniversityLibraries(int id){
         ArrayList<Library> libraries = new ArrayList<>();
@@ -67,7 +80,7 @@ public class LibraryRestController {
             return res;
         }else return "This University has no libraries!";
 
-    }
+    }*/
 
 
     @RequestMapping("/create")

@@ -8,11 +8,12 @@ import com.stepping.step5.entity.repository.LibraryRepository;
 import com.stepping.step5.entity.repository.StudentRepository;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/book")
@@ -27,7 +28,7 @@ public class BookRestController {
     @Autowired
     LibraryRepository libraryRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllBooks(){
         ArrayList<Book> collection = new ArrayList<>();
@@ -56,6 +57,16 @@ public class BookRestController {
         }
         return book.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<Book>> getAllBooks(){
+        return new ResponseEntity<>((Collection<Book>) booksRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Book> getBookWithId(@PathVariable int id){
+        return new ResponseEntity<>(booksRepository.findOne(id), HttpStatus.OK);
     }
 
     @RequestMapping("/create")
@@ -100,7 +111,7 @@ public class BookRestController {
         return "Book succesfully deleted!";
     }
 
-    @RequestMapping("/student")
+    /*@RequestMapping("/student")
     @ResponseBody
     public String getAllStudentBooks(int id){
         ArrayList<Book> books = new ArrayList<>();
@@ -138,5 +149,5 @@ public class BookRestController {
             return res;
         }else
             return "This library has no books!";
-    }
+    }*/
 }

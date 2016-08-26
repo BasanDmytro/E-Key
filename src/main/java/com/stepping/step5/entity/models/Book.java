@@ -1,5 +1,6 @@
 package com.stepping.step5.entity.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -25,6 +26,8 @@ public class Book implements Serializable{
     @Column(name = "Publ_year")
     private int publYear;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "Id_library")
     private Library library;
@@ -32,6 +35,7 @@ public class Book implements Serializable{
     @Column(name = "OnlyHere")
     private Boolean onlyHere;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "Id_owner")
     private Student student;

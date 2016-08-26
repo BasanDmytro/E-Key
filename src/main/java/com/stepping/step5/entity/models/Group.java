@@ -1,5 +1,7 @@
 package com.stepping.step5.entity.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -17,11 +19,13 @@ public class Group implements Serializable{
     @Column(name = "Name_group")
     private String groupName;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "Id_univer")
     private University university;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "Id_course")
     private Course course;

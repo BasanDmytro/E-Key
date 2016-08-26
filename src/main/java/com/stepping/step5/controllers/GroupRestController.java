@@ -7,11 +7,12 @@ import com.stepping.step5.entity.repository.CoursesRepository;
 import com.stepping.step5.entity.repository.GroupsRepository;
 import com.stepping.step5.entity.repository.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/group")
@@ -26,7 +27,7 @@ public class GroupRestController {
     @Autowired
     GroupsRepository groupsRepository;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     @ResponseBody
     public String getAllGroups(){
         ArrayList<Group> collection = new ArrayList<>();
@@ -55,6 +56,16 @@ public class GroupRestController {
         }
         return group.toString();
 
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Collection<Group>> getAllGroops(){
+        return new ResponseEntity<>((Collection<Group>) groupsRepository.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Group> getGroupWithId(@PathVariable int id){
+        return new ResponseEntity<>(groupsRepository.findOne(id), HttpStatus.OK);
     }
 
     @RequestMapping("/create")
@@ -97,7 +108,7 @@ public class GroupRestController {
         return "Group succesfully deleted!";
     }
 
-    @RequestMapping("/university")
+    /*@RequestMapping("/university")
     @ResponseBody
     public String getAllUniversityGroups(int id){
         ArrayList<Group> groups = new ArrayList<>();
@@ -115,9 +126,9 @@ public class GroupRestController {
             return res;
         }else
             return "This University has no groups!";
-    }
+    }*/
 
-    @RequestMapping("/course")
+    /*@RequestMapping("/course")
     @ResponseBody
     public String getAllCourseGroups(int id){
         ArrayList<Group> groups = new ArrayList<>();
@@ -135,6 +146,6 @@ public class GroupRestController {
             return res;
         }else return "This course has no groups!";
 
-    }
+    }*/
 
 }
