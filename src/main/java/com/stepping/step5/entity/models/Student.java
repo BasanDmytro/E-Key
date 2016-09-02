@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Student implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id_student", nullable = false)
     private Integer studentId;
 

@@ -1,10 +1,10 @@
 package com.stepping.step5.entity.repository;
 
-import com.stepping.step5.entity.models.Library;
+import com.stepping.step5.entity.models.Librarian;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface LibraryRepository extends CrudRepository<Library, Integer> {
+public interface LibrarianRepository extends CrudRepository<Librarian, Integer> {
 }

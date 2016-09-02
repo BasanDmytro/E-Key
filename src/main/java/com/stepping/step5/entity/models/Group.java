@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Group implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id_group", nullable = false)
     private Integer groupId;
 

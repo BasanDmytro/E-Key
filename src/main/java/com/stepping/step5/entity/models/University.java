@@ -15,9 +15,9 @@ import javax.persistence.Table;
 @Table(name = "university")
 public class University implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "Id_univer", nullable = false)
-    private Integer univerId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "Id", nullable = false)
+    private Integer id;
 
     @Column(name = "Name_univer")
     private String univerName;
@@ -65,11 +65,11 @@ public class University implements Serializable{
     }
 
     public int getUniverId() {
-        return univerId;
+        return id;
     }
 
     public void setUniverId(Integer univerId) {
-        this.univerId = univerId;
+        this.id = univerId;
     }
 
     public String getUniverName() {
@@ -88,19 +88,19 @@ public class University implements Serializable{
         this.groups = groups;
     }
 
-    public int getNumbOfLibraries(){
+    /*public int getNumbOfLibraries(){
         return libraries.size();
-    }
+    }*/
 
-    public int getNumberOfGroups(){
+    /*public int getNumberOfGroups(){
         return groups.size();
-    }
+    }*/
 
     @Override
     public String toString() {
-        return "Univercity{" + "univerId=" + univerId +
+        return "Univercity{" + "univerId=" + id +
                 ", univerName=" + univerName +
-                ", number of libraries=" + getNumbOfLibraries() +
-                ", number of courses=" + getNumbOfLibraries() + '}';
+                /*", number of libraries=" + getNumbOfLibraries() +
+                ", number of courses=" + getNumbOfLibraries() + */ '}';
     }
 }

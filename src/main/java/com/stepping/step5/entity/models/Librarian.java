@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Librarian implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id_librarian", nullable = false)
     private Integer librarianId;
 

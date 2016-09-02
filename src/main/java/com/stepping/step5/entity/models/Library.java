@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Library implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id_library", nullable = false)
     private Integer libraryId;
 
